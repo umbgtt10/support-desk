@@ -66,7 +66,12 @@ const generateToken = (id) => {
    })
 }
 
+const getMe = asyncHandler(async (req, res) => {
+   res.send('me')
+})
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getMe
 }

@@ -5,7 +5,7 @@ const initialState = {
     tickets: [],
     ticket: {},
     isError: false,
-    iSuccess: false,
+    isSuccess: false,
     isLoading:false,
     message: ''
 }
@@ -49,9 +49,10 @@ export const ticketSlice = createSlice({
           .addCase(createTicket.pending, (state) => {
             state.isLoading = true
           })
-          .addCase(createTicket.fulfilled, (state) => {
+          .addCase(createTicket.fulfilled, (state, action) => {
             state.isLoading = false
-            state.iSuccess = true
+            state.isSuccess = true
+            state.ticket = action.payload
           })
           .addCase(createTicket.rejected, (state, action) => {
             state.isLoading = false
@@ -64,7 +65,7 @@ export const ticketSlice = createSlice({
           })
           .addCase(getTickets.fulfilled, (state, action) => {
             state.isLoading = false
-            state.iSuccess = true
+            state.isSuccess = true
             state.tickets = action.payload
           })
           .addCase(getTickets.rejected, (state, action) => {
@@ -75,5 +76,5 @@ export const ticketSlice = createSlice({
     }
 })
 
-export const {reset} = ticketSlice.actions
+export const { reset } = ticketSlice.actions
 export default ticketSlice.reducer
